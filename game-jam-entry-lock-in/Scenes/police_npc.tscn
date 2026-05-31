@@ -1,23 +1,69 @@
 [gd_scene format=3 uid="uid://dg1vrp1pr5ig5"]
 
+[ext_resource type="Shader" uid="uid://c8wo68jlyowv7" path="res://Scenes/outline_shader.gdshader" id="1_k0vmg"]
 [ext_resource type="Script" uid="uid://bhig7el1b7exv" path="res://Scenes/playerMovement.gd" id="1_vl2al"]
-[ext_resource type="Texture2D" uid="uid://bcuhts2cqbx0c" path="res://assets/player/spritePlayerSheet.png" id="2_0hkck"]
+[ext_resource type="Texture2D" uid="uid://cy6ruuw46ouvw" path="res://assets/player/spritePlayerSheet.png" id="2_0hkck"]
+[ext_resource type="Script" uid="uid://ci2s571gy2ogm" path="res://Scenes/vision_pivot.gd" id="3_6x6wt"]
+[ext_resource type="Texture2D" uid="uid://ciodtdepdufsq" path="res://assets/guardia/Walk (1).png" id="3_bkmsp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0s1c"]
+resource_local_to_scene = true
+shader = ExtResource("1_k0vmg")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hkck"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0hkck"]
-atlas = ExtResource("2_0hkck")
-region = Rect2(33, 14, 29, 21)
+size = Vector2(29, 67)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6x6wt"]
 atlas = ExtResource("2_0hkck")
-region = Rect2(64, 0, 32, 35)
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0vmg"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(0, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0s1c"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(128, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i40kx"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(256, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gjlh"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(384, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6oald"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(512, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3vja"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(640, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4vdi"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(768, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1y61g"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(896, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg0yn"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(1024, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtyh"]
+atlas = ExtResource("3_bkmsp")
+region = Rect2(1152, 40, 128, 88)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6x6wt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0hkck")
+"texture": SubResource("AtlasTexture_6x6wt")
 }],
 "loop": true,
 "name": &"jump",
@@ -25,7 +71,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6x6wt")
+"texture": SubResource("AtlasTexture_k0vmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0s1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i40kx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gjlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6oald")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3vja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4vdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1y61g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg0yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtyh")
 }],
 "loop": true,
 "name": &"move",
@@ -33,14 +106,18 @@ animations = [{
 }]
 
 [node name="policeNpc" type="CharacterBody2D" unique_id=94176087 groups=["possessable"]]
+material = SubResource("ShaderMaterial_u0s1c")
+collision_layer = 2
 script = ExtResource("1_vl2al")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=767524209]
+position = Vector2(-6.5, 9.5)
 shape = SubResource("RectangleShape2D_0hkck")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=31265239]
 sprite_frames = SubResource("SpriteFrames_6x6wt")
-animation = &"jump"
+animation = &"move"
+frame_progress = 0.7301774
 
 [node name="dashTimer" type="Timer" parent="." unique_id=1959019011]
 wait_time = 0.2
@@ -51,5 +128,42 @@ wait_time = 0.2
 position = Vector2(12, 2)
 rotation = 1.5707964
 
+[node name="VisionPivot" type="Node2D" parent="." unique_id=1630092012]
+script = ExtResource("3_6x6wt")
+scan_speed = 0.5
+scan_angle = 20.0
+vision_range = 300.0
+
+[node name="Polygon2D" type="Polygon2D" parent="VisionPivot" unique_id=1423530396]
+visible = false
+color = Color(2.1300592, 0, 0, 0.28235295)
+polygon = PackedVector2Array(0, 0, 300, -100, 300, 100)
+
+[node name="LineOfSight" type="RayCast2D" parent="VisionPivot" unique_id=617997084]
+position = Vector2(-3, -18)
+target_position = Vector2(67, 0)
+collision_mask = 7
+hit_from_inside = true
+
+[node name="VisionArea" type="Area2D" parent="VisionPivot" unique_id=2029792557]
+visible = false
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionPivot/VisionArea" unique_id=1630472710]
+polygon = PackedVector2Array(0, 0, 300, -100, 300, 100)
+
+[node name="caughtTime" type="Timer" parent="VisionPivot" unique_id=275503080]
+wait_time = 1.5
+
+[node name="slowmoTime" type="Timer" parent="VisionPivot" unique_id=1220068237]
+
+[node name="edgeCheck" type="RayCast2D" parent="." unique_id=1444393654]
+target_position = Vector2(32, 50)
+
+[node name="wallCheck" type="RayCast2D" parent="." unique_id=857438580]
+target_position = Vector2(42, 4)
+
 [connection signal="timeout" from="dashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="VisionPivot/caughtTime" to="VisionPivot" method="_on_caught_time_timeout"]
+[connection signal="timeout" from="VisionPivot/slowmoTime" to="VisionPivot" method="_on_slowmo_time_timeout"]
